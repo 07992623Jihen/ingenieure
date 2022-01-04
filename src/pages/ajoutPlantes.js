@@ -74,7 +74,7 @@ const AjoutPlante = (props) => {
         formData
       );
 
-      setsuccess("Plante ajouté");
+      setsuccess("mauvaise herbe ajoute");
     } catch (err) {
       seterror(err.message || "il y a un probleme");
     }
@@ -108,7 +108,7 @@ const AjoutPlante = (props) => {
                       src={previewUrl}
                       alt="Preview"
                       rounded
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "70%", height: "100%" }}
                     />
                   )}
 
@@ -157,7 +157,7 @@ const AjoutPlante = (props) => {
                 />
               </Form.Group>
               <Button variant="primary" type="submit">
-                Submit
+               Ajouter
               </Button>
             </Form>
           </Col>

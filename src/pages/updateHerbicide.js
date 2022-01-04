@@ -13,6 +13,30 @@ const UpdateHerbicide = (props) => {
   const [error, seterror] = useState(null);
   const [success, setsuccess] = useState(null);
 
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/herbicide/${id}`
+        );
+
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setNom(responseData.herbicide.nom);
+        setmatiere(responseData.herbicide.matiere);
+        setdose(responseData.herbicide.dose);
+        setstade(responseData.herbicide.stade);
+      } catch (err) {
+        seterror(err.message);
+      }
+    };
+
+    sendRequest();
+  }, []);
+
   const onchange = (e) => {
     if (e.target.name === "nom") {
       setNom(e.target.value);
@@ -30,7 +54,7 @@ const UpdateHerbicide = (props) => {
   const submit = async (e) => {
     e.preventDefault();
 
-    console.log(nom,matiere,dose,stade)
+    console.log(nom, matiere, dose, stade);
 
     try {
       let response = await fetch(`http://localhost:5000/api/herbicide/${id}`, {
@@ -49,7 +73,7 @@ const UpdateHerbicide = (props) => {
       if (!response.ok) {
         throw new Error(responsedata.message);
       }
-      setsuccess("Herbicide modifier")
+      setsuccess("Herbicide modifier");
     } catch (err) {
       console.log(err);
       seterror(err.message || "probleme!!");
@@ -67,6 +91,7 @@ const UpdateHerbicide = (props) => {
               <Form.Group controlId="formGridAddress2">
                 <Form.Label>Nom</Form.Label>
                 <Form.Control
+                  value={nom}
                   placeholder=""
                   name="nom"
                   onChange={onchange}
@@ -74,8 +99,9 @@ const UpdateHerbicide = (props) => {
                 />
               </Form.Group>
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>Matière</Form.Label>
+                <Form.Label>Matière actif</Form.Label>
                 <Form.Control
+                  value={matiere}
                   placeholder=""
                   name="matiere"
                   onChange={onchange}
@@ -83,8 +109,9 @@ const UpdateHerbicide = (props) => {
                 />
               </Form.Group>
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>Dose</Form.Label>
+                <Form.Label>Dose par hectare</Form.Label>
                 <Form.Control
+                  value={dose}
                   type="number"
                   placeholder=""
                   name="dose"
@@ -94,8 +121,9 @@ const UpdateHerbicide = (props) => {
               </Form.Group>
 
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>Stade</Form.Label>
+                <Form.Label>Stade d'intervention </Form.Label>
                 <Form.Control
+                  value={stade}
                   placeholder=""
                   name="stade"
                   onChange={onchange}
@@ -104,7 +132,7 @@ const UpdateHerbicide = (props) => {
               </Form.Group>
 
               <Button variant="primary" type="submit">
-                Submit
+                Modifier
               </Button>
             </Form>
           </Col>

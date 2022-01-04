@@ -18,7 +18,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SimpleMenu from "./menuNav";
 import { Link } from "react-router-dom";
 import ListIcon from "@material-ui/icons/List";
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
+import MessageIcon from "@material-ui/icons/Message";
 
 const drawerWidth = 240;
 
@@ -119,7 +120,12 @@ export default function NavigationDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5">Planti</Typography>
-          <div style={{ marginLeft: "85%" }}>
+          <div style={{ marginLeft: "80%" }}>
+            <Link to="/chat" style={{ textDecoration: "none", color: "black" }}>
+              <MessageIcon color="black" />
+            </Link>
+          </div>
+          <div style={{ marginLeft: "3%" }}>
             <SimpleMenu />
           </div>
         </Toolbar>
@@ -149,22 +155,26 @@ export default function NavigationDrawer(props) {
         </div>
         <Divider />
         <List>
-          <Link to="/" style={{textDecoration:"none",color:"black"}}>
+          <Link to="/" style={{ textDecoration: "none", color: "black" }}>
             <ListItem button>
               <ListItemIcon>
                 <ListIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={"Liste plante"} />
+              <ListItemText primary={"Liste Mauvaise Herbe"} />
             </ListItem>
           </Link>
-          <Link to="/reclamation" style={{textDecoration:"none",color:"black"}}>
+          <Link
+            to="/reclamation"
+            style={{ textDecoration: "none", color: "black" }}
+          >
             <ListItem button>
               <ListItemIcon>
                 <RecordVoiceOverIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={"Reclamtion"} />
+              <ListItemText primary={"Réponse "} />
             </ListItem>
           </Link>
+          
         </List>
         <Divider />
       </Drawer>

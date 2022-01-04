@@ -13,6 +13,8 @@ import AjoutHerbicide from "./pages/ajoutHerbicide";
 import UpdateHerbicide from "./pages/updateHerbicide";
 import Reclamation from "./pages/reclamation";
 import Responce from "./pages/responce";
+import Chat from "./pages/chat/chat";
+import ListClient from "./pages/agriculteur/list";
 
 function App() {
   const { userId, token, login, logout } = UserAuth();
@@ -29,6 +31,8 @@ function App() {
         <Route path="/update-herbicide/:id"  component={UpdateHerbicide} />
         <Route path="/reclamation"  component={Reclamation} />
         <Route path="/responce/:id"  component={Responce} />
+        <Route path="/chat"  component={ListClient} />
+        <Route path="/chat-agriculteur/:id"  component={Chat} />
       </React.Fragment>
     );
   } else {

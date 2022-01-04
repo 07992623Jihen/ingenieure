@@ -123,7 +123,7 @@ const Responce = (props) => {
   const [descriptionAdulte, setDescriptionAdulte] = useState();
   const [descriptionAvance, setDescriptionAvanace] = useState();
   const [lutte, setLutte] = useState();
-  const [typeLutte, setTypeLutte] = useState();
+  const [typeLutte, setTypeLutte] = useState('culturale');
   const [herbicide, setHerbicide] = useState();
 
   const [error, seterror] = useState(null);
@@ -150,6 +150,38 @@ const Responce = (props) => {
   };
 
   const id = useParams().id;
+
+  const submit1 = (id) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("image", File2);
+
+      axios
+        .post(`http://localhost:5000/api/reponse/adulte/${id}`, formData)
+        .then((response) => {
+          console.log(response.data);
+        });
+    } catch (err) {
+      seterror(err.message || "il y a un probleme");
+    }
+  };
+
+  const submit2 = (id) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("image", File);
+
+      axios
+        .post(`http://localhost:5000/api/reponse/avance/${id}`, formData)
+        .then((response) => {
+          console.log(response.data);
+        });
+    } catch (err) {
+      seterror(err.message || "il y a un probleme");
+    }
+  };
 
   const submit = async (e) => {
     e.preventDefault();
@@ -187,13 +219,15 @@ const Responce = (props) => {
         throw new Error(responsedata.message);
       } */
 
-      await axios
+      axios
         .post(`http://localhost:5000/api/reponse/ajout`, formData)
         .then((response) => {
-          console.log(response.data.reponse);
+          submit1(response.data.reponse._id);
+          submit2(response.data.reponse._id);
         });
 
-      setsuccess("Plante ajouté");
+      setsuccess("Réponce ajouté");
+      setNom(null);
       seterror(null);
     } catch (err) {
       seterror(err.message || "il y a un probleme");
@@ -235,6 +269,7 @@ const Responce = (props) => {
               <Form.Group controlId="formGridAddress2">
                 <Form.Label>Nom</Form.Label>
                 <Form.Control
+                  value={nom}
                   placeholder=""
                   name="nom"
                   onChange={onchange}
@@ -272,7 +307,7 @@ const Responce = (props) => {
                       src={previewUrl1}
                       alt="Preview"
                       rounded
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "60%", height: "10%" }}
                     />
                   )}
 
@@ -282,13 +317,13 @@ const Responce = (props) => {
                     onClick={pickImageHandler1}
                     style={{ marginTop: "20px" }}
                   >
-                    Image stade plature
+                    Image stade plantule
                   </Button>
                 </div>
                 {!isValid1 && <p></p>}
               </div>
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>Description stade plature</Form.Label>
+                <Form.Label>Description stade plantule</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={5}
@@ -311,13 +346,14 @@ const Responce = (props) => {
                   accept=".jpg,.png,.jpeg"
                   onChange={pickedHandler2}
                 />
+
                 <div>
                   {previewUrl2 && (
                     <Image
                       src={previewUrl2}
                       alt="Preview"
                       rounded
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "60%", height: "10%" }}
                     />
                   )}
 
@@ -325,7 +361,7 @@ const Responce = (props) => {
                     type="button"
                     variant="primary"
                     onClick={pickImageHandler2}
-                    style={{ marginTop: "20px" }}
+                    style={{ width: "60%", height: "10%" }}
                   >
                     image Stade adulte
                   </Button>
@@ -364,7 +400,7 @@ const Responce = (props) => {
                       src={previewUrl}
                       alt="Preview"
                       rounded
-                      style={{ width: "100%", height: "100%" }}
+                      style={{ width: "60%", height: "10%" }}
                     />
                   )}
 

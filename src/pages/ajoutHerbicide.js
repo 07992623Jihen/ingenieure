@@ -75,7 +75,7 @@ const AjoutHerbicide = (props) => {
                 />
               </Form.Group>
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>Matière</Form.Label>
+                <Form.Label>Matière actif</Form.Label>
                 <Form.Control
                   placeholder=""
                   name="matiere"
@@ -84,7 +84,7 @@ const AjoutHerbicide = (props) => {
                 />
               </Form.Group>
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>Dose</Form.Label>
+                <Form.Label>Dose par Hectare</Form.Label>
                 <Form.Control
                   type="number"
                   placeholder=""
@@ -95,7 +95,7 @@ const AjoutHerbicide = (props) => {
               </Form.Group>
 
               <Form.Group controlId="formGridAddress2">
-                <Form.Label>Stade</Form.Label>
+                <Form.Label>Stade d'intervention</Form.Label>
                 <Form.Control
                   placeholder=""
                   name="stade"
@@ -105,7 +105,7 @@ const AjoutHerbicide = (props) => {
               </Form.Group>
 
               <Button variant="primary" type="submit">
-                Submit
+              Ajouter 
               </Button>
             </Form>
           </Col>

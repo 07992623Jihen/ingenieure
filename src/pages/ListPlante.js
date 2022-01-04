@@ -101,7 +101,7 @@ export default function ListePlante() {
           <SuccessModel success={success} />
           <div style={{ marginBlock: "20px" }}>
             <Link to="/ajout-plante">
-              <Tooltip title="Ajout plante" aria-label="add">
+              <Tooltip title="Ajout Mauvaise herbe" aria-label="add">
                 <Fab color="primary" className={classes.fab}>
                   <AddIcon />
                 </Fab>
@@ -160,7 +160,7 @@ export default function ListePlante() {
                               setList(
                                 list.filter((item) => item._id !== row._id)
                               );
-                              setsuccess("Mauvaise herbe bien suprimer");
+                              setsuccess("Mauvaise herbe bien supprimer");
                             } catch (err) {
                               console.log(err);
                               seterror(err.message || "il y a un probleme");

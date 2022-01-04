@@ -88,7 +88,7 @@ const Login = (props) => {
                   </Form.Group>
 
                   <Button variant="primary" type="submit">
-                    Connextion
+                    Connexion
                   </Button>
                   <div style={{ marginTop: "2%" }}></div>
                   

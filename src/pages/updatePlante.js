@@ -48,6 +48,28 @@ const UpdatePlante = (props) => {
   const [description, setDescription] = useState();
   const [error, seterror] = useState(null);
   const [success, setsuccess] = useState(null);
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/mauvaiseHerbe/${id}`
+        );
+
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setNom(responseData.mauvaiseHerbe.nom);
+        setType(responseData.mauvaiseHerbe.type);
+        setDescription(responseData.mauvaiseHerbe.description);
+      } catch (err) {
+        seterror(err.message);
+      }
+    };
+
+    sendRequest();
+  }, []);
 
   const onchange = (e) => {
     if (e.target.name === "nom") {
@@ -77,11 +99,12 @@ const UpdatePlante = (props) => {
         formData
       );
 
-      setsuccess("Plante modifié");
+      setsuccess("mauvaise herbe modifié");
     } catch (err) {
       seterror(err.message || "il y a un probleme");
     }
   };
+
   return (
     <div>
       <Container>
@@ -121,7 +144,7 @@ const UpdatePlante = (props) => {
                     onClick={pickImageHandler}
                     style={{ marginTop: "20px" }}
                   >
-                    PICK IMAGE
+                    modifier un image
                   </Button>
                 </div>
                 {!isValid && <p></p>}
@@ -129,6 +152,7 @@ const UpdatePlante = (props) => {
               <Form.Group controlId="formGridAddress2">
                 <Form.Label>Nom</Form.Label>
                 <Form.Control
+                  value={nom}
                   placeholder=""
                   name="nom"
                   onChange={onchange}
@@ -138,6 +162,7 @@ const UpdatePlante = (props) => {
               <Form.Group controlId="formGridAddress2">
                 <Form.Label>Type</Form.Label>
                 <Form.Control
+                  value={type}
                   as="select"
                   placeholder=""
                   name="type"
@@ -152,6 +177,7 @@ const UpdatePlante = (props) => {
               <Form.Group controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
+                  value={description}
                   as="textarea"
                   rows={5}
                   name="description"
@@ -160,7 +186,7 @@ const UpdatePlante = (props) => {
                 />
               </Form.Group>
               <Button variant="primary" type="submit">
-                Submit
+                modifier
               </Button>
             </Form>
           </Col>

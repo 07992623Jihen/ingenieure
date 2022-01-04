@@ -14,10 +14,12 @@ import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Link } from "react-router-dom";
-import ErrorModel from "../model/error-model";
-import SuccessModel from "../model/success-model";
+import ErrorModel from "../../model/error-model";
+import SuccessModel from "../../model/success-model";
 import TablePagination from '@material-ui/core/TablePagination';
-import {useParams} from 'react-router-dom'
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import MessageIcon from "@material-ui/icons/Message";
+
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -52,30 +54,24 @@ const useStyles = makeStyles({
   },
 });
 
-
-
-export default function ListeHerbicide() {
+export default function ListClient() {
   const classes = useStyles();
 
   const [list, setList] = useState();
   const [error, seterror] = useState(null);
   const [success, setsuccess] = useState(null);
 
-  const id = useParams().id
-
   useEffect(() => {
     const sendRequest = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:5000/api/herbicide/mauvaiseHerbe/${id}`
-        );
+        const response = await fetch(`http://localhost:5000/api/agriculteur/`);
 
         const responseData = await response.json();
         if (!response.ok) {
           throw new Error(responseData.message);
         }
 
-        setList(responseData.herbicides);
+        setList(responseData.agriculteur);
       } catch (err) {
         seterror(err.message);
       }
@@ -103,76 +99,41 @@ export default function ListeHerbicide() {
         <Col xs={9}>
           <ErrorModel error={error} />
           <SuccessModel success={success} />
-          <div style={{ marginBlock: "20px" }}>
-            <Link to={`/ajoutHerbicide/${id}`}>
-              <Tooltip title="Ajout herbicide" aria-label="add">
-                <Fab color="primary" className={classes.fab}>
-                  <AddIcon />
-                </Fab>
-              </Tooltip>
-            </Link>
-          </div>
+          
 
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                 
-                  <StyledTableCell align="right">Nom</StyledTableCell>
-                  <StyledTableCell align="right">Matière actif</StyledTableCell>
-                  <StyledTableCell align="right">Dose Par Hectare</StyledTableCell>
-                  <StyledTableCell align="right">Stade d'intervention</StyledTableCell>
-                  <StyledTableCell align="right">Action</StyledTableCell>
+                <StyledTableCell align="right">Nom</StyledTableCell>
+                    <StyledTableCell align="right">Prénom</StyledTableCell>
+                    <StyledTableCell align="right">Email</StyledTableCell>
+                    <StyledTableCell align="right">Tel</StyledTableCell>
+                    <StyledTableCell align="right">Action</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {list &&
                   list.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
-                    <StyledTableRow key={row._id}>
-                      <StyledTableCell align="right">{row.nom}</StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.matiere}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.dose}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.stade}
-                      </StyledTableCell>
-
-                      <StyledTableCell align="right">
-                        <DeleteForeverIcon
-                          color="secondary"
-                          onClick={async (event) => {
-                            try {
-                              let response = await fetch(
-                                `http://localhost:5000/api/herbicide/${row._id}`,
-                                {
-                                  method: "DELETE",
-                                  headers: {
-                                    "Content-Type": "application/json",
-                                  },
-                                }
-                              );
-                              let responsedata = await response.json();
-                              if (!response.ok) {
-                                throw new Error(responsedata.message);
-                              }
-                              setList(
-                                list.filter((item) => item._id !== row._id)
-                              );
-                              setsuccess("Herbicide bien supprimer");
-                            } catch (err) {
-                              console.log(err);
-                              seterror(err.message || "il y a un probleme");
-                            }
-                          }}
-                        />
-                        <Link to={`/update-herbicide/${row._id}`}>
-                          <UpdateIcon style={{ color: "green" }} />
-                        </Link>
-                      </StyledTableCell>
-                    </StyledTableRow>
+                    <StyledTableRow key={row.name}>
+                        <StyledTableCell align="right">
+                          {row.name}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {row.prenom}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {row.email}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {row.tel}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          <Link to={`/chat-agriculteur/${row._id}`} ><MessageIcon color="blue" /></Link>
+                        </StyledTableCell>
+                        
+                        
+                      </StyledTableRow>
                   ))}
               </TableBody>
             </Table>
