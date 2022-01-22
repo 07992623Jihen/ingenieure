@@ -35,7 +35,7 @@ export default function SimpleMenu() {
         <MenuItem
           onClick={() => {
             auth.logout();
-            window.location.href = "http://localhost:3000/";
+            
           }}
         >
           Logout

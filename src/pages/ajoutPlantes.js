@@ -157,7 +157,7 @@ const AjoutPlante = (props) => {
                 />
               </Form.Group>
               <Button variant="primary" type="submit">
-               Ajouter
+                Ajouter
               </Button>
             </Form>
           </Col>
