@@ -5,7 +5,7 @@ const NavLogin = (props) => {
     <div>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>
-            Planti
+        Traitement des  mauvaises herbes
         </Navbar.Brand>
       </Navbar>
     </div>

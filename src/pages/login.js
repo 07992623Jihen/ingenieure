@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { Authcontext } from "../context/auth-context";
 import ErrorModel from "../model/error-model";
 import SuccessModel from "../model/success-model";
-import ForgetPassword from "../components/forgetPassword";
+
 
 const Login = (props) => {
   const [email, setEmail] = useState();

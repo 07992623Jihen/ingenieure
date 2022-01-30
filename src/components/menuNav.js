@@ -30,7 +30,7 @@ export default function SimpleMenu() {
         onClose={handleClose}
       >
         
-        <MenuItem onClick={handleClose}>Chat</MenuItem>
+    
 
         <MenuItem
           onClick={() => {

@@ -119,8 +119,8 @@ export default function NavigationDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5">Planti</Typography>
-          <div style={{ marginLeft: "80%" }}>
+          <Typography variant="h5">Traitement des  mauvaises herbes</Typography>
+          <div style={{ marginLeft: "60%" }}>
             <Link to="/chat" style={{ textDecoration: "none", color: "black" }}>
               <MessageIcon color="black" />
             </Link>
@@ -171,7 +171,7 @@ export default function NavigationDrawer(props) {
               <ListItemIcon>
                 <RecordVoiceOverIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={"Réponse "} />
+              <ListItemText primary={"Réponse Mauvaise Herbe"} />
             </ListItem>
           </Link>
           
